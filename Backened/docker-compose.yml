@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: skin-cancer-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000
+    volumes:
+      - ./backend/model:/app/model:ro
+      - ./backend/static/gradcam:/app/static/gradcam
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - skin-cancer-net
+
+networks:
+  skin-cancer-net:
+    driver: bridge

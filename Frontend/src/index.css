@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy-950: #050d1a;
+    --navy-900: #0a1628;
+    --navy-800: #0f2040;
+    --teal-400: #2dd4bf;
+    --teal-500: #14b8a6;
+    --amber-400: #fbbf24;
+    --rose-500: #f43f5e;
+    --sage-500: #22c55e;
+  }
+
+  html {
+    background-color: var(--navy-950);
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-navy-950 text-slate-200 font-display antialiased;
+    background-image:
+      linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    min-height: 100vh;
+  }
+
+  * {
+    @apply border-navy-800;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--navy-900);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e3a6e;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--teal-500);
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-navy-900 border border-navy-700 rounded-2xl;
+  }
+
+  .card-glow {
+    @apply card;
+    box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.1), 0 4px 32px rgba(5, 13, 26, 0.6);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm
+           bg-teal-500 text-navy-950 hover:bg-teal-400
+           transition-all duration-200 active:scale-95
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
+           text-slate-400 hover:text-teal-400 hover:bg-navy-800
+           transition-all duration-200;
+  }
+
+  .label-mono {
+    @apply font-mono text-xs tracking-widest uppercase text-teal-500;
+  }
+
+  .risk-malignant {
+    @apply text-rose-400;
+  }
+  .risk-benign {
+    @apply text-sage-500;
+  }
+  .risk-uncertain {
+    @apply text-amber-400;
+  }
+}
+
+/* Scan line animation used in loading */
+@keyframes scanline {
+  0% { top: -4px; }
+  100% { top: 100%; }
+}
+.animate-scanline {
+  animation: scanline 1.8s linear infinite;
+}
+
+/* Fade in utility */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.4s ease both;
+}

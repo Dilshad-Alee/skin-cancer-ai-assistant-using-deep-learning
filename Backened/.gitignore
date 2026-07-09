@@ -1,0 +1,28 @@
+# Environment
+.env
+*.env
+
+# Model weights (large binary files)
+backend/model/*.keras
+backend/model/*.h5
+backend/model/*.pb
+
+# GradCAM outputs
+backend/static/gradcam/*.png
+backend/static/gradcam/*.jpg
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
